@@ -19,14 +19,13 @@
 //
 // # 支持的模型
 //
+//	deepseek-v4-pro      — 旗舰模型（最强推理能力）
 //	deepseek-v4-flash    — 快速推理（推荐日常使用）
-//	deepseek-chat        — DeepSeek-V3 对话模型
-//	deepseek-reasoner    — DeepSeek-R1 推理模型
 //
 // # 自定义配置
 //
 //	llm := deepseek.New(deepseek.Config{
-//	    ModelName: "deepseek-chat",
+//	    ModelName: "deepseek-v4-pro",
 //	    APIKey:    os.Getenv("DEEPSEEK_API_KEY"),
 //	    BaseURL:   "https://api.deepseek.com/v1",
 //	})
@@ -63,7 +62,7 @@ import (
 
 // Config 配置 DeepSeek 客户端。
 type Config struct {
-	// ModelName DeepSeek 模型名称，如 "deepseek-v4-flash"、"deepseek-chat"、"deepseek-reasoner"。
+	// ModelName DeepSeek 模型名称，如 "deepseek-v4-flash"、"deepseek-v4-pro"。
 	ModelName string
 
 	// APIKey 从 DeepSeek 平台获取的 API Key。

@@ -61,11 +61,11 @@ set DEEPSEEK_API_KEY=sk-xxx
 
 ```go
 // 方式 1：简洁模式
-llm := deepseek.New("deepseek-chat")
+llm := deepseek.New("deepseek-v4-pro")
 
 // 方式 2：完整配置
 llm := deepseek.NewWithConfig(deepseek.Config{
-    ModelName: "deepseek-reasoner",
+    ModelName: "deepseek-v4-pro",
     APIKey:    os.Getenv("DEEPSEEK_API_KEY"),
     BaseURL:   "https://api.deepseek.com/v1",    // 代理或私有部署
     HTTPClient: &http.Client{Timeout: 30 * time.Second},
@@ -77,8 +77,7 @@ llm := deepseek.NewWithConfig(deepseek.Config{
 | 模型名 | 说明 |
 |--------|------|
 | `deepseek-v4-flash` | 快速推理（推荐日常使用） |
-| `deepseek-chat` | DeepSeek-V3 对话模型 |
-| `deepseek-reasoner` | DeepSeek-R1 推理模型 |
+| `deepseek-v4-pro` | 旗舰模型（最强推理能力） |
 
 ## 工作原理
 
@@ -98,13 +97,13 @@ iter.Seq2 (流式)          ◀──    SSE chunk →
 ```python
 # Python ADK
 from google.adk.models.lite_llm import LiteLlm
-model = LiteLlm(model="deepseek/deepseek-chat", api_base="...")
+model = LiteLlm(model="deepseek/deepseek-v4-pro", api_base="...")
 ```
 
 ```go
 // Go ADK + adk-deepseek（同等体验）
 import deepseek "github.com/Linsugar/adk-deepseek"
-model := deepseek.New("deepseek-chat")
+model := deepseek.New("deepseek-v4-pro")
 ```
 
 ## 许可证
