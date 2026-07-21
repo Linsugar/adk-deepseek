@@ -286,10 +286,11 @@ func (m *LLM) generateStream(ctx context.Context, req *model.LLMRequest) iter.Se
 				finishReason = mapFinishReason(*choice.FinishReason)
 			}
 
+			turnComplete := finishReason != genai.FinishReasonUnspecified
 			llmResp := &model.LLMResponse{
 				Content:      content,
-				Partial:      true,
-				TurnComplete: finishReason != genai.FinishReasonUnspecified,
+				Partial:      !turnComplete,
+				TurnComplete: turnComplete,
 				FinishReason: finishReason,
 			}
 
