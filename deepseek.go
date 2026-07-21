@@ -282,6 +282,10 @@ func (m *LLM) generateStream(ctx context.Context, req *model.LLMRequest) iter.Se
 					Role:  "model",
 					Parts: parts,
 				}
+			} else if choice.FinishReason != nil {
+				// 空 delta + finish_reason（如 DeepSeek 流最后一帧 {"delta":{},"finish_reason":"stop"}）
+				// Content 不能为 nil，否则 ADK postprocess 会跳过，导致流无法正常结束
+				content = &genai.Content{Role: "model"}
 			}
 
 			finishReason := genai.FinishReasonUnspecified
