@@ -269,7 +269,10 @@ func (m *LLM) generateStream(ctx context.Context, req *model.LLMRequest) iter.Se
 				}
 			}
 
-			if len(parts) == 0 && len(delta.ToolCalls) == 0 {
+			// 即使 delta 为空，若带有 finish_reason 也不能跳过——
+			// DeepSeek 流式最后一帧 {"delta":{},"finish_reason":"stop"}
+			// 必须传给 ADK 以标记流结束（Partial=false）
+			if len(parts) == 0 && len(delta.ToolCalls) == 0 && choice.FinishReason == nil {
 				continue
 			}
 
